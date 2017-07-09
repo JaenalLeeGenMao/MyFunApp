@@ -17,8 +17,8 @@ class Login extends React.Component {
         this.handleSubmit = this.handleSubmit.bind(this);
     }
     componentDidMount() {
-        Axios.post('http://localhost:3000/user/auth').then(function(res) {
-            console.log(res);
+        Axios.get('http://localhost:3000').then(function(res) {
+            console.log(res.data);
         });
     }
     //handle input change of the username
@@ -63,13 +63,6 @@ class Login extends React.Component {
                 sessionId: ''
             }
         };
-        console.log(formData);
-        Axios.post('localhost:3000/user/auth', {formData})
-        .then(function (response) {
-            console.log(response);
-        }).catch(function (error) {
-            console.log(error);
-        });
     }
 
     //Rendering the login form

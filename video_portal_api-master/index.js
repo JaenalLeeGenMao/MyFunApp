@@ -17,8 +17,27 @@ var helperFunctions = require('./helpers/helperFunctions');
 
 // Uncomment the following lines to start logging requests to consoles.
 app.use(morgan('combined'));
-app.get('/video', function (req, res) {
-  res.send(req);
+app.get('/', function (req, res) {
+    // We want to set the content-type header so that the browser understands
+    //  the content of the response.
+    res.contentType('application/json');
+
+    // Normally, the would probably come from a database, but we can cheat:
+    // var people = [
+    //   { name: 'Dave', location: 'Atlanta' },
+    //   { name: 'Santa Claus', location: 'North Pole' },
+    //   { name: 'Man in the Moon', location: 'The Moon' }
+    // ];
+    var people = userModel.seed();
+
+    // Since the request is for a JSON representation of the people, we
+    //  should JSON serialize them. The built-in JSON.stringify() function
+    //  does that.
+    // var peopleJSON = JSON.stringify(people.get());
+
+    // Now, we can use the response object's send method to push that string
+    //  of people JSON back to the browser in response to this request:
+    res.send(people);
 });
 // parse application/x-www-form-urlencoded.
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -26,7 +45,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 //connedting to mongoDB
-mongoose.connect('mongodb://'+configs.dbHost+'/'+configs.dbName, { useMongoClient: true });
+mongoose.connect('mongodb://'+configs.dbHost+'/'+configs.dbName);
 //populating data if DB is not already populated.
 helperFunctions.populateDb();
 

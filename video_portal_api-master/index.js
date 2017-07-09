@@ -14,15 +14,28 @@ var routes = require('./routes/routes');
 var userModel = require('./models/users');
 var helperFunctions = require('./helpers/helperFunctions');
 
+//Grant access allowing both server and client to run in localhost
+var allowCrossDomainMiddleWare = (req, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Methods', ['GET','PUT','POST','DELETE']);
+  res.header('Access-Control-Allow-Headers', 'Content-Type', 'Authorization');
+
+  // intercept OPTIONS method
+  if ('OPTIONS' === req.method) {
+    res.sendStatus(200);
+  } else {
+    next();
+  }
+}
+app.use(allowCrossDomainMiddleWare);
 
 // Uncomment the following lines to start logging requests to consoles.
 app.use(morgan('combined'));
-app.get('/', function (req, res) {
-    // We want to set the content-type header so that the browser understands
+app.get('/user/auth', function (req, res) {
+    // Set the content-type header so that the browser understands
     //  the content of the response.
     res.contentType('application/json');
 
-    // Normally, the would probably come from a database, but we can cheat:
     // var people = [
     //   { name: 'Dave', location: 'Atlanta' },
     //   { name: 'Santa Claus', location: 'North Pole' },
@@ -30,15 +43,11 @@ app.get('/', function (req, res) {
     // ];
     var people = userModel.seed();
 
-    // Since the request is for a JSON representation of the people, we
-    //  should JSON serialize them. The built-in JSON.stringify() function
-    //  does that.
-    // var peopleJSON = JSON.stringify(people.get());
-
-    // Now, we can use the response object's send method to push that string
-    //  of people JSON back to the browser in response to this request:
+    // Using response object send method to push the array back to browser
     res.send(people);
 });
+
+app.post('/user/auth', userModel.authUser);
 // parse application/x-www-form-urlencoded.
 app.use(bodyParser.urlencoded({ extended: false }));
 // parse application/json.

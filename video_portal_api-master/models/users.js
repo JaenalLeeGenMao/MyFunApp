@@ -30,7 +30,7 @@ var userModel = {};
 
 //seeding database with default users
 userModel.seed = function(){
-	//collection of defaultUser
+	//collection of default Users
 	var existingUser = [];
 
 	var defaultUser = new User({username:'ali', password:'5f4dcc3b5aa765d61d8327deb882cf99', activeSession:''});

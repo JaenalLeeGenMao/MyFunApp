@@ -9,7 +9,9 @@ class Login extends React.Component {
         this.state = {
             username: '',
             password: '',
-            loading: false
+            loading: false,
+            match: false,
+            users: []
         };
         //Bind methods so it is declared before using it to prevent "undefined" error
         this.handleUsername = this.handleUsername.bind(this);
@@ -17,9 +19,14 @@ class Login extends React.Component {
         this.handleSubmit = this.handleSubmit.bind(this);
     }
     componentDidMount() {
-        Axios.get('http://localhost:3000').then(function(res) {
-            console.log(res.data);
-        });
+        Axios.get('http://localhost:3000/user/auth').then(function(res) {
+            this.setState(function() {
+                return {
+                    users: res.data
+                }
+            });
+            console.log(this.state.users);
+        }.bind(this));
     }
     //handle input change of the username
     handleUsername(event) {
@@ -52,17 +59,29 @@ class Login extends React.Component {
             }
         });
         // create a string for an HTTP body message
-        var username = encodeURIComponent(this.state.username);
-        var password = encodeURIComponent(this.state.password);
-        var formData = {
-            body : {
-                username: username,
-                password: password
-            },
-            query : {
-                sessionId: ''
-            }
-        };
+        var username = this.state.username;
+        var password = this.state.password;
+        var existingUser = this.state.users;
+        var match = this.state.match;
+        // {
+        //     existingUser.map(function(user) {
+        //         if(user.username === username && user.password === password) {
+        //             this.setState(function() {
+        //                 return {
+        //                     loading: false,
+        //                     match: true
+        //                 }
+        //             });
+        //         };
+        //     }.bind(this));
+        // }
+        Axios.post('http://localhost:3000/user/auth').then(function(res) {
+            console.log(res.data);
+        });
+    }
+
+    proceed(event) {
+        console.log("You've successfully signed in");
     }
 
     //Rendering the login form
@@ -73,7 +92,7 @@ class Login extends React.Component {
                     <h3 className="text-white">Login</h3>
                     <input value={this.state.username} onChange={this.handleUsername} className="form-control" type="text" placeholder="Username" /><br/>
                     <input value={this.state.password} onChange={this.handlePassword} className="form-control" type="password" placeholder="Password" /><br/>
-                    <Link to="/home" onClick={this.handleSubmit} disabled={this.state.loading} className="button">
+                    <Link to="/home" onClick={this.state.match === false ? this.handleSubmit:this.proceed} disabled={this.state.loading} className="button">
                         {this.state.loading === false?"Sign in":<Loading/>}
                     </Link>
                 </form>

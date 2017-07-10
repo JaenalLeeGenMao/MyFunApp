@@ -4,6 +4,7 @@ var ReactRouter = require('react-router-dom');
 var Router = ReactRouter.BrowserRouter;
 var Route = ReactRouter.Route;
 var Switch = ReactRouter.Switch;
+var DefaultRoute = ReactRouter.DefaultRoute;
 var Login = require('./login');
 var Home = require('./home');
 

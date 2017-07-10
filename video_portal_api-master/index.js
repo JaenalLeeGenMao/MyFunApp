@@ -62,8 +62,11 @@ helperFunctions.populateDb();
 routes(app);
 
 //Sending requiest to server to authorize the user
-// app.post('/user/auth', userModel.authUser);
 app.post('/user/auth', users.auth);
+
+//Sending requiest to server to confirm user sessionId to be destroyed
+app.get('/user/logout', helperFunctions.isAuthenticated, users.logout);
+
 // serve video files.
 app.use('/videos',express.static('videos'));
 // serve client side code.

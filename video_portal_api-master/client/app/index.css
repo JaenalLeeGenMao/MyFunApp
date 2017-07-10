@@ -28,6 +28,12 @@ body, html {
     padding-left: 50%;
 }
 
+.top-middle {
+    position: absolute;
+    top: 50px;
+    width: 100%;
+}
+
 .login-card {
     text-align: center;
     justify-content: center;
@@ -49,6 +55,12 @@ body, html {
 .pull-left {
     float: left;
     padding-left: 3%;
+    font-weight: bold;
+}
+
+.pull-right {
+    float: right;
+    padding-right: 3%;
     font-weight: bold;
 }
 
@@ -126,4 +138,107 @@ div.invalid-container {
     padding-top: 10%;
     padding-bottom: 25%;
     overflow: hidden;
+}
+
+div.home-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;     
+}
+
+.unstyled {
+    padding-right: 1%;
+    margin: 1.2%;
+    list-style: none;
+    display: flex;
+}
+
+.unstyled li {
+    padding-right: 10px;
+}
+
+.nav {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+div.nav {
+    background: white;
+    height: inherit;
+    padding-bottom: 125%;
+}
+
+div.nav > h2 {
+    margin-top: 0.7%;
+    padding-left: 1%;
+}
+
+/*perfectdropdown*/
+.dropdown-menu {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    z-index: 1000;
+    display: none;
+    min-width: 160px;
+    padding: 5px 0;
+    margin: 2px 0 0;
+    font-size: 1rem;
+    color: #373a3c;
+    text-align: left;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #e5e5e5;
+    border-radius: .25rem
+}
+
+.dropdown-header, .dropdown-item {
+    display: block;
+    padding: 3px 20px;
+    line-height: 1.5;
+    white-space: nowrap
+}
+
+.dropdown-divider {
+    height: 1px;
+    margin: .5rem 0;
+    background-color: #e5e5e5
+}
+
+.dropdown-item {
+    width: 100%;
+    clear: both;
+    font-weight: 400;
+    color: #373a3c;
+    text-align: inherit;
+    background: 0 0;
+    border: 0
+}
+
+.list-dropdown{
+	position: relative;
+}
+
+.list-dropdown:hover > .dropdown-menu{
+	display: block;
+}
+.list-dropdown > .dropdown-menu{
+    top: 80%;
+    right:10%;
+}
+
+.blowfish:hover {
+    transform: scale(1.1,1.1);
+    cursor: pointer;
+}
+
+.icon {
+    width: 20px;
+    height: 15px;
 }

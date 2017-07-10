@@ -1,7 +1,6 @@
 var React = require('react');
 var Loading = require('./loading');
-var ReactRouter = require('react-router-dom');
-var Link = ReactRouter.Link;
+var Link = require('react-router-dom').Link;
 var Axios = require('axios');
 
 class Login extends React.Component {
@@ -10,6 +9,7 @@ class Login extends React.Component {
         this.state = {
             username: '',
             password: '',
+            sessionId: '',
             loading: false,
             match: false,
             usernameError: null,
@@ -81,7 +81,6 @@ class Login extends React.Component {
         // create a string for an HTTP body message
         var username = this.state.username;
         var password = this.state.password;
-        var loading = this.state.loading;
 
         // promt the user if the username field is not filled
         if ( username.length === 0 ) {
@@ -117,21 +116,23 @@ class Login extends React.Component {
         if ( username.length && password.length) {
 
             // Using axios sending requsts to fetch data like AJAX
-            Axios.post('http://localhost:3000/user/auth', {username: username, password: password}).then(function(res, something) {
+            Axios.post('http://localhost:3000/user/auth', {username: username, password: password}).then(function(res) {
                 console.log("post method");
                 console.log(res.data);
                 // Id the request success and user exist in DB then do this
                 if (res.data.status === "success") {
-                    this.props.router.push('/home');
                     this.setState(function() {
                         return {
                             loading: false,
                             username: res.data.username,
+                            sessionId: res.data.sessionId.toString(),
                             match: true,
                             usernameError: null,
                             passwordError: null
                         }
                     });
+                    console.log(this.state.sessionId);
+                    this.props.history.push('/home?username=' + username + '&sessionId=' + this.state.sessionId);
                 }
                 // Id the request error and user does NOT exist in DB then do this
                 else {
@@ -159,7 +160,7 @@ class Login extends React.Component {
         // Show an initial loader.
         console.log("Loading...");
         this.setState({ loading: true});
-        setTimeout(this.handleSubmit(event), 3000);
+        setTimeout(this.handleSubmit, 3000);
     }
 
     redirectToHome(event) {
@@ -173,14 +174,14 @@ class Login extends React.Component {
         var usernameError = this.state.usernameError;
         var passwordError = this.state.passwordError;
         return (
-            <div className="center-middle" action="/home" onSubmit={this.redirectToHome}>
+            <div className="center-middle">
                 <form className="login-card">
                     <h3 className="text-white">Login</h3>
                     <div className="text-warning pull-left">{this.state.usernameError}</div>
                     <input value={username} onChange={this.handleUsername} className="form-control" type="text" placeholder="Username" style={usernameError === null ? {"border": "none"}:{"border": "2px solid #d0021b" }}/><br/>
                     <div className="text-warning pull-left">{this.state.passwordError}</div>
                     <input value={password} onChange={this.handlePassword} className="form-control" type="password" placeholder="Password" style={passwordError === null ? {"border": "none"}:{"border": "2px solid #d0021b" }}/><br/>
-                    <Link to="/home" type="submit" onClick={this.state.match ? this.redirectToHome:this.proceed} disabled={this.state.loading} className="button">
+                    <Link to="/home" onClick={this.state.match ? this.redirectToHome:this.proceed} disabled={this.state.loading} className="button">
                         {this.state.loading === false?"Sign in":<Loading/>}
                     </Link>
                 </form>

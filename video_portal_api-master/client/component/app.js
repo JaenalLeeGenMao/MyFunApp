@@ -4,9 +4,9 @@ var ReactRouter = require('react-router-dom');
 var Router = ReactRouter.BrowserRouter;
 var Route = ReactRouter.Route;
 var Switch = ReactRouter.Switch;
-var DefaultRoute = ReactRouter.DefaultRoute;
 var Login = require('./login');
 var Home = require('./home');
+var Video = require('./video');
 
 class App extends React.Component {
     render() {
@@ -16,6 +16,7 @@ class App extends React.Component {
                     <Switch>
                         <Route exact path="/" component={Login} />
                         <Route exact path="/home" component={Home} />
+                        <Route exact path="/videos" component={Video} />
                         <Route render={function() {
                             return (
                                     <div className="invalid-container">

@@ -4,7 +4,7 @@ var videos = {};
 
 // controller that handles video listings fetch request.
 videos.get = function (req, res) {
-	
+
 	var skip = req.query.skip;
 	var limit = req.query.limit;
 
@@ -22,7 +22,7 @@ videos.get = function (req, res) {
 
 // controller that handles single video fetch request.
 videos.getOne = function (req, res) {
-	
+
 	var videoid = req.query.videoId;
 
 	var videosData = videoModel.getOne(videoid);
@@ -39,7 +39,7 @@ videos.getOne = function (req, res) {
 
 // controller that handles video rate request
 videos.rate = function (req, res) {
-	
+
 	var videoId = req.body.videoId;
 	var rating = req.body.rating;
 
@@ -53,7 +53,7 @@ videos.rate = function (req, res) {
 		res.status(400);
 		res.send(err);
 	});
-		
+
 };
 
 

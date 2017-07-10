@@ -83,13 +83,21 @@ class Nav extends React.Component {
                     <li className="dropdown-menu">
                         <ul className="dropdown-item unstyled">
                             <li>
-                                <NavLink activeClassName="active" to="/videos">
-                                    <img className="icon" src="https://image.flaticon.com/icons/svg/26/26025.svg"/>&nbsp;Video
+                                <NavLink exact activeClassName="active" to={'/home' + '?username=' + username + '&sessionId=' + sessionId}>
+                                    <img className="icon" src="https://image.flaticon.com/icons/svg/2/2144.svg"/>
+                                    <label>&nbsp;Home</label>
+                                </NavLink>
+                            </li>
+                            <li>
+                                <NavLink activeClassName="active" to={'/videos' + '?username=' + username + '&sessionId=' + sessionId}>
+                                    <img className="icon" src="https://image.flaticon.com/icons/svg/26/26025.svg"/>
+                                    <label>&nbsp;Video</label>
                                 </NavLink>
                             </li>
                             <li>
                                 <NavLink activeClassName="active" to="/" onClick={this.handleLogout}>
-                                    <img className="icon" src="https://image.flaticon.com/icons/svg/159/159707.svg"/>&nbsp;logout
+                                    <img className="icon" src="https://image.flaticon.com/icons/svg/159/159707.svg"/>
+                                    <label>&nbsp;logout</label>
                                 </NavLink>
                             </li>
                         </ul>

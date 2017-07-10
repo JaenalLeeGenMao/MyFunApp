@@ -7,9 +7,9 @@ var Loading = require('./loading');
 function HomeScreen(props) {
     return (
         <div className="home-container">
-            <img src='http://i.imgur.com/6bgtvrg.jpg'/>
-            <code>But you could checkout videos on top right</code>
-        </div>
+                <img src='http://i.imgur.com/6bgtvrg.jpg'/>
+                <code>But you could checkout videos on top right</code>
+            </div>
     )
 }
 

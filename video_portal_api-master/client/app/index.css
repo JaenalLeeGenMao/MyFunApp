@@ -3,16 +3,17 @@ body, html {
     /* Full height */
     height: 100%;
     margin: inherit;
-    overflow: hidden;
+    overflow-x: hidden;
 }
 
 .bg {
+    position: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
     /* The image used */
     background-image: url("http://www.telegraph.co.uk/content/dam/Travel/hotels/europe/germany/berlin/regents-berlin-courtyard-p.jpg");
-
     /* Full height */
     height: 100%;
-
     /* Center and scale the image nicely */
     background-position: center;
     background-repeat: no-repeat;
@@ -80,53 +81,57 @@ body, html {
 }
 
 .button {
-  color: #e6e6e6;
-  background: hsl(200, 97%, 45%);
-  border: none;
-  font-size: 16px;
-  font-weight: bold;
-  border-radius: 3px;
-  width: 95%;
-  text-align: center;
-  display: block;
-  padding: 7px 0;
-  margin: 10px auto;
+    color: #e6e6e6;
+    background: hsl(200, 97%, 45%);
+    border: none;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 3px;
+    width: 95%;
+    text-align: center;
+    display: block;
+    padding: 7px 0;
+    margin: 10px auto;
 }
 
 .button:hover:enabled {
-  background: hsl(208, 97%, 45%);
-  color: #fff;
-  text-decoration: none;
-  cursor: pointer;
+    background: hsl(208, 97%, 45%);
+    color: #fff;
+    text-decoration: none;
+    cursor: pointer;
 }
 
-.button[disabled]:hover{
+.button[disabled]:hover {
     cursor: not-allowed;
 }
 
 a {
-  color: #00bcd4;
-  font-weight: bold;
-  text-decoration: none;
-  transition: color 0.4s;
+    color: #00bcd4;
+    font-weight: bold;
+    text-decoration: none;
+    transition: color 0.4s;
+}
+
+a>label {
+    position: fixed;
 }
 
 a:hover {
-  color: #1976d2;
+    color: #1976d2;
 }
 
 .text-center {
-  text-align: center;
+    text-align: center;
 }
 
 .error-message {
-  padding: 0 16px;
-  color: tomato;
+    padding: 0 16px;
+    color: tomato;
 }
 
 .success-message {
-  padding: 0 16px;
-  color: green;
+    padding: 0 16px;
+    color: green;
 }
 
 div.invalid-container {
@@ -135,20 +140,19 @@ div.invalid-container {
     align-items: center;
     background: white;
     height: inherit;
-    padding-top: 10%;
+    padding-top: 7.5%;
     padding-bottom: 25%;
     overflow: hidden;
 }
 
 div.home-container {
+    position: absolute;
+    top: 0;
+    margin-top: 10%;
+    width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 100%;     
 }
 
 .unstyled {
@@ -159,7 +163,7 @@ div.home-container {
 }
 
 .unstyled li {
-    padding-right: 10px;
+    margin-right: 10px;
 }
 
 .nav {
@@ -170,16 +174,18 @@ div.home-container {
 
 div.nav {
     background: white;
-    height: inherit;
-    padding-bottom: 125%;
+    height: auto;
+    padding-bottom: 48%;
 }
 
-div.nav > h2 {
+div.nav>h2 {
     margin-top: 0.7%;
     padding-left: 1%;
 }
 
+
 /*perfectdropdown*/
+
 .dropdown-menu {
     position: absolute;
     top: 100%;
@@ -221,24 +227,76 @@ div.nav > h2 {
     border: 0
 }
 
-.list-dropdown{
-	position: relative;
+.list-dropdown {
+    position: relative;
 }
 
-.list-dropdown:hover > .dropdown-menu{
-	display: block;
+.list-dropdown:hover>.dropdown-menu {
+    display: block;
 }
-.list-dropdown > .dropdown-menu{
+
+.list-dropdown>.dropdown-menu {
     top: 80%;
-    right:10%;
+    right: 10%;
 }
 
 .blowfish:hover {
-    transform: scale(1.1,1.1);
+    transform: scale(1.1, 1.1);
     cursor: pointer;
 }
 
 .icon {
-    width: 20px;
-    height: 15px;
+    width: 10%;
+    height: 10%;
+}
+
+.video-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.video-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    width: 600px;
+    height: 500px;
+}
+
+/*CSS for scrollbar*/
+
+::-webkit-scrollbar {
+    width: 12px;
+}
+
+::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5);
+}
+
+@media (min-aspect-ratio: 16/9) {
+    .fullscreen-bg__video {
+        height: 300%;
+        top: -100%;
+    }
+}
+
+@media (max-aspect-ratio: 16/9) {
+    .fullscreen-bg__video {
+        width: 300%;
+        left: -100%;
+    }
+}
+
+@media (max-width: 767px) {
+    .fullscreen-bg__video {
+        display: none;
+    }
 }

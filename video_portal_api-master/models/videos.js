@@ -3,8 +3,8 @@ var q = require('q');
 
 //defining schema for videos table
 var videoSchema = new mongoose.Schema({
-	  name: { type: String }, 
-	  description: { type: String }, 
+	  name: { type: String },
+	  description: { type: String },
 	  url: String,
 	  ratings: []
 });
@@ -31,17 +31,17 @@ videosModel.seed = function(){
 		videoObject.name = '['+i+'] '+videoObject.name;
 		dataToInsert.push(videoObject);
 	}
-	
+
 	Video.collection.insert(dataToInsert, function(err, video) {
 		if(err){
-			console.log('error occured in populating database');	
-			console.log(err);	
-		} 
+			console.log('error occured in populating database');
+			console.log(err);
+		}
 		else{
-			console.log('Videos table populated.');	
-		}	
+			console.log('Videos table populated.');
+		}
 	});
-	
+
 }
 
 //function to get video listings
@@ -54,13 +54,13 @@ videosModel.get = function(skip, limit){
 	Video.find(function(err, dbVideo) {
 		if (err){
 			results.reject(err);
-		} 
-		
+		}
+
 		results.resolve(dbVideo);
 	}).skip(skip).limit(limit);
 
 	return results.promise;
-	
+
 }
 
 //function to get single video by its id.
@@ -74,18 +74,18 @@ videosModel.getOne = function(id){
 	Video.findOne({_id:id},function(err, dbVideo) {
 		if (err){
 			results.reject(err);
-		} 
-		
-		if(dbVideo){
-			results.resolve(dbVideo);	
-		} else{
-			results.reject({status:'error', error:'Invalid video Id supplied.'});	
 		}
-		
+
+		if(dbVideo){
+			results.resolve(dbVideo);
+		} else{
+			results.reject({status:'error', error:'Invalid video Id supplied.'});
+		}
+
 	});
 
 	return results.promise;
-	
+
 }
 
 //function to rate single video by its id.
@@ -112,20 +112,20 @@ videosModel.rate = function(id, ratting){
 		Video.findOne({_id:id},function(err, dbVideo) {
 			if (err){
 				results.reject(err);
-			} 
+			}
 
 			dbVideo.ratings.push(ratting)
-			
+
 			dbVideo.markModified('array');
 	    	dbVideo.save();
 
 			results.resolve(dbVideo);
 		});
 	}
-	
+
 
 	return results.promise;
-	
+
 }
 
 module.exports = videosModel;

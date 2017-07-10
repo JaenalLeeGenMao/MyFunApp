@@ -12,13 +12,14 @@ db.on('error', console.error);
 var configs = require('./config');
 var routes = require('./routes/routes');
 var userModel = require('./models/users');
+var users = require('./controllers/users');
 var helperFunctions = require('./helpers/helperFunctions');
 
 //Grant access allowing both server and client to run in localhost
 var allowCrossDomainMiddleWare = (req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*');
   res.header('Access-Control-Allow-Methods', ['GET','PUT','POST','DELETE']);
-  res.header('Access-Control-Allow-Headers', 'Content-Type', 'Authorization');
+  res.header('Access-Control-Allow-Headers', ['Content-Type', 'Authorization']);
 
   // intercept OPTIONS method
   if ('OPTIONS' === req.method) {
@@ -31,23 +32,22 @@ app.use(allowCrossDomainMiddleWare);
 
 // Uncomment the following lines to start logging requests to consoles.
 app.use(morgan('combined'));
-app.get('/user/auth', function (req, res) {
-    // Set the content-type header so that the browser understands
-    //  the content of the response.
-    res.contentType('application/json');
+// app.get('/user/auth', function (req, res) {
+//     // Set the content-type header so that the browser understands
+//     //  the content of the response.
+//     res.contentType('application/json');
+//
+//     // var people = [
+//     //   { name: 'Dave', location: 'Atlanta' },
+//     //   { name: 'Santa Claus', location: 'North Pole' },
+//     //   { name: 'Man in the Moon', location: 'The Moon' }
+//     // ];
+//     var people = userModel.seed();
+//
+//     // Using response object send method to push the array back to browser
+//     res.send(people);
+// });
 
-    // var people = [
-    //   { name: 'Dave', location: 'Atlanta' },
-    //   { name: 'Santa Claus', location: 'North Pole' },
-    //   { name: 'Man in the Moon', location: 'The Moon' }
-    // ];
-    var people = userModel.seed();
-
-    // Using response object send method to push the array back to browser
-    res.send(people);
-});
-
-app.post('/user/auth', userModel.authUser);
 // parse application/x-www-form-urlencoded.
 app.use(bodyParser.urlencoded({ extended: false }));
 // parse application/json.
@@ -61,6 +61,9 @@ helperFunctions.populateDb();
 //Initilizing routes.
 routes(app);
 
+//Sending requiest to server to authorize the user
+// app.post('/user/auth', userModel.authUser);
+app.post('/user/auth', users.auth);
 // serve video files.
 app.use('/videos',express.static('videos'));
 // serve client side code.

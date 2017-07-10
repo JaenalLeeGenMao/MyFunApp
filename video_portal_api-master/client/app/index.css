@@ -1,5 +1,5 @@
 body, html {
-    font-family: sans-serif;
+    font-family: Georgia, serif;
     /* Full height */
     height: 100%;
     margin: inherit;
@@ -40,6 +40,16 @@ body, html {
 
 .text-white {
     color: white;
+}
+
+.text-warning {
+    color: #d0021b;
+}
+
+.pull-left {
+    float: left;
+    padding-left: 3%;
+    font-weight: bold;
 }
 
 .form-control {

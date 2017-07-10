@@ -25,34 +25,34 @@ function makeSessionId()
 }
 
 
-//Initlizing interface object of this model.
+// Initlizing interface object of this model.
 var userModel = {};
 
 //seeding database with default users
 userModel.seed = function(){
 	//collection of default Users
-	var existingUser = [];
+	// var existingUser = [];
 
 	var defaultUser = new User({username:'ali', password:'5f4dcc3b5aa765d61d8327deb882cf99', activeSession:''});
 	defaultUser.save(function(err, user) {
 	  if(err) console.dir('error occured in populating database');
 	});
-	existingUser.push(defaultUser);
+	// existingUser.push(defaultUser);
 
 	defaultUser = new User({username:'harry', password:'5f4dcc3b5aa765d61d8327deb882cf99', activeSession:''});
 	defaultUser.save(function(err, user) {
 	  if(err) console.dir('error occured in populating database');
 	});
-	existingUser.push(defaultUser);
+	// existingUser.push(defaultUser);
 
 	defaultUser = new User({username:'tom', password:'5f4dcc3b5aa765d61d8327deb882cf99', activeSession:''});
 	defaultUser.save(function(err, user) {
 	  if(err) console.dir('error occured in populating database');
 	});
-	existingUser.push(defaultUser);
+	// existingUser.push(defaultUser);
 
 	console.log('users table populated.');
-	return existingUser;
+	// return existingUser;
 }
 
 //Function to auth user baed on username and password.

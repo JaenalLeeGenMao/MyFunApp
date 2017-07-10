@@ -25,7 +25,7 @@ class Loading extends React.Component {
                     }
                 });
             }
-        }.bind(this), 300);
+        }.bind(this), 500);
     }
 
     componentWillUnmount () {

@@ -77,32 +77,15 @@ class Nav extends React.Component {
                 <h2>
                     <NavLink exact activeClassName="active" to={url + '?username=' + username + '&sessionId=' + sessionId}>CrossOver Video Portal</NavLink>
                 </h2>
-                <ul className="pull-right unstyled list-dropdown">
-                    <li>Welcome, {username}</li>
-                    <li className="blowfish">Logout &#9660;</li>
-                    <li className="dropdown-menu">
-                        <ul className="dropdown-item unstyled">
-                            <li>
-                                <NavLink exact activeClassName="active" to={'/home' + '?username=' + username + '&sessionId=' + sessionId}>
-                                    <img className="icon" src="https://image.flaticon.com/icons/svg/2/2144.svg"/>
-                                    <label>&nbsp;Home</label>
-                                </NavLink>
-                            </li>
-                            <li>
-                                <NavLink activeClassName="active" to={'/videos' + '?username=' + username + '&sessionId=' + sessionId}>
-                                    <img className="icon" src="https://image.flaticon.com/icons/svg/26/26025.svg"/>
-                                    <label>&nbsp;Video</label>
-                                </NavLink>
-                            </li>
-                            <li>
-                                <NavLink activeClassName="active" to="/" onClick={this.handleLogout}>
-                                    <img className="icon" src="https://image.flaticon.com/icons/svg/159/159707.svg"/>
-                                    <label>&nbsp;logout</label>
-                                </NavLink>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
+                <h3>
+                    <NavLink activeClassName="active" to={'/About' + '?username=' + username + '&sessionId=' + sessionId}> About </NavLink>
+                </h3>
+                <h3>
+                    <NavLink activeClassName="active" to={'/videos' + '?username=' + username + '&sessionId=' + sessionId}> Video </NavLink>
+                </h3>
+                <h4>
+                    <NavLink activeClassName="active" to="/" onClick={this.handleLogout}> logout </NavLink>
+                </h4>
             </div>
         )
     }

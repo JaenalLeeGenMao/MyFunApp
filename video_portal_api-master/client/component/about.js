@@ -7,22 +7,31 @@ var Loading = require('./loading');
 function HomeScreen(props) {
     return (
         <div className="home-container">
-                <img src='http://i.imgur.com/6bgtvrg.jpg'/>
-                <code>But you could checkout videos on top right</code>
-            </div>
+            <h1>Hello There!</h1>
+            <p>I am Jaenal from Batam islands, Indonesia.</p>
+            <p>I graduated from Monash University Malaysia in July 2016</p>
+            <p>This is actually my first time using react to build an app.</p>
+            <p>I have been learning React about 2 weeks. I manage to learn build small Restful API </p>
+            <p>Using Node, MongoDB and Express.</p>
+            <p>2 Hours left till submittion and I dont think I can finish all the requirements</p>
+            <p>I still have a lot to learn on React but I truly hope </p>
+            <p>that you consider me to be part of your team </p>
+            <p>as frontend engineer</p>
+            <p>Incase any file is corrupted, you can visit my <a href="https://github.com/JaenalLeeGenMao/MyFunApp/tree/master/video_portal_api-master">GitHub Account</a> </p>
+        </div>
     )
 }
 
 // Screen that displays lazy loader when logging out is invoked
 function LogoutScreen(props) {
     return (
-        <div className="home-container">
+        <div>
             <Loading text={"Logging out"} />
         </div>
     )
 }
 
-class Home extends React.Component {
+class About extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -83,4 +92,4 @@ class Home extends React.Component {
     }
 }
 
-module.exports = Home;
+module.exports = About;

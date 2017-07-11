@@ -132,7 +132,7 @@ class Login extends React.Component {
                         }
                     });
                     console.log(this.state.sessionId);
-                    this.props.history.push('/home?username=' + username + '&sessionId=' + this.state.sessionId);
+                    this.props.history.push('/about?username=' + username + '&sessionId=' + this.state.sessionId);
                 }
                 // Id the request error and user does NOT exist in DB then do this
                 else {
@@ -181,7 +181,7 @@ class Login extends React.Component {
                     <input value={username} onChange={this.handleUsername} className="form-control" type="text" placeholder="Username" style={usernameError === null ? {"border": "none"}:{"border": "2px solid #d0021b" }}/><br/>
                     <div className="text-warning pull-left">{this.state.passwordError}</div>
                     <input value={password} onChange={this.handlePassword} className="form-control" type="password" placeholder="Password" style={passwordError === null ? {"border": "none"}:{"border": "2px solid #d0021b" }}/><br/>
-                    <Link to="/home" onClick={this.state.match ? this.redirectToHome:this.proceed} disabled={this.state.loading} className="button">
+                    <Link to="/about" onClick={this.state.match ? this.redirectToHome:this.proceed} disabled={this.state.loading} className="button">
                         {this.state.loading === false?"Sign in":<Loading/>}
                     </Link>
                 </form>

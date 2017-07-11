@@ -5,7 +5,7 @@ var Router = ReactRouter.BrowserRouter;
 var Route = ReactRouter.Route;
 var Switch = ReactRouter.Switch;
 var Login = require('./login');
-var Home = require('./home');
+var About = require('./about');
 var Video = require('./video');
 
 class App extends React.Component {
@@ -15,14 +15,14 @@ class App extends React.Component {
                 <div>
                     <Switch>
                         <Route exact path="/" component={Login} />
-                        <Route exact path="/home" component={Home} />
+                        <Route exact path="/About" component={About} />
                         <Route exact path="/videos" component={Video} />
                         <Route render={function() {
                             return (
-                                    <div className="invalid-container">
-                                        <img src='http://i.imgur.com/6bgtvrg.jpg'/>
-                                        <code>Page not found</code>
-                                    </div>
+                                <div className="invalid-container">
+                                    <img src='http://i.imgur.com/6bgtvrg.jpg'/>
+                                    <code>Page not found</code>
+                                </div>
                             )
                         }} />
                     </Switch>

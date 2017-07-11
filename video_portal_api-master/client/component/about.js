@@ -2,6 +2,7 @@ var React = require('react');
 var queryString = require('query-string');
 var Nav = require('./nav');
 var Loading = require('./loading');
+var Axios = require('axios');
 
 // simple screen that displays wumpus in the home page
 function HomeScreen(props) {
@@ -11,7 +12,7 @@ function HomeScreen(props) {
             <p>I am Jaenal from Batam islands, Indonesia.</p>
             <p>I graduated from Monash University Malaysia in July 2016</p>
             <p>This is actually my first time using react to build an app.</p>
-            <p>I have been learning React about 2 weeks. I manage to learn build small Restful API </p>
+            <p>I have been learning React about 2 weeks. While learning I manage to build small Restful API </p>
             <p>Using Node, MongoDB and Express.</p>
             <p>2 Hours left till submittion and I dont think I can finish all the requirements</p>
             <p>I still have a lot to learn on React but I truly hope </p>
@@ -47,6 +48,7 @@ class About extends React.Component {
     componentWillMount() {
         var data = this.props.location.search;
         data = queryString.parse(data);
+
         // console.log(data.username);
         this.setState(function() {
             return {

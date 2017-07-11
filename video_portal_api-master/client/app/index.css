@@ -156,12 +156,10 @@ div.home-container {
     flex-direction: column;
     align-items: center;
 }
-/*
+
 .unstyled {
-    padding: 0;
-    margin: 0;
     list-style: none;
-}*/
+}
 
 /*.unstyled li {
     margin-right: 10px;
@@ -208,6 +206,44 @@ div.nav {
 
 .video-label{
     font-size: 0.8em;
+}
+
+/*CSS for star rating*/
+%visually-hidden {
+  position: absolute;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  height: 1px; width: 1px;
+  margin: -1px; padding: 0; border: 0;
+}
+
+.star-rating {
+
+  &__star {
+    display: inline-block;
+    padding: 3px;
+    vertical-align: middle;
+    line-height: 1;
+    font-size: 1.5em;
+    color: #ABABAB;
+    transition: color .2s ease-out;
+
+    &:hover {
+      cursor: pointer;
+    }
+
+    &.is-selected {
+      color: #FFD700;
+    }
+
+    &.is-disabled:hover {
+      cursor: default;
+    }
+  }
+
+  &__checkbox {
+    @extend %visually-hidden;
+  }
 }
 
 /*CSS for scrollbar*/

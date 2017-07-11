@@ -23,6 +23,7 @@
     "react-dom": "^15.6.1",
     "react-html5video": "^2.2.0",
     "react-router-dom": "^4.1.1",
+    "react-star-rating-component": "^1.2.4",
     "validator": "^8.0.0"
   },
   "devDependencies": {

@@ -62,16 +62,16 @@ helperFunctions.populateDb();
 //Initilizing routes.
 routes(app);
 
-//Sending requiest to server to authorize the user
+//Sending request to server to authorize the user
 app.post('/user/auth', users.auth);
-//Sending requiest to server to confirm user sessionId to be destroyed
+//Sending request to server to confirm user sessionId to be destroyed
 app.get('/user/logout', helperFunctions.isAuthenticated, users.logout);
 
-//Sending requiest to server to get all videos
+//Sending request to server to get all videos
 app.get('/videos', helperFunctions.isAuthenticated, videos.get);
-//Sending requiest to server to get single video
+//Sending request to server to get single video
 app.get('/video', helperFunctions.isAuthenticated, videos.getOne);
-//Sending requiest to server to authorize the video rating
+//Sending request to server to authorize the video rating
 app.post('/video/ratings', helperFunctions.isAuthenticated, videos.rate);
 
 // serve video files.

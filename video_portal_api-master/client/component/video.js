@@ -72,7 +72,7 @@ class Video extends React.Component {
         this.handleLogout = this.handleLogout.bind(this);
         this.handleLoader = this.handleLoader.bind(this);
         this.handleScroll = this.handleScroll.bind(this);
-        this.onStarClick = this.onStarClick.bind(this);
+        // this.onStarClick = this.onStarClick.bind(this);
         this.handleVideoRequest = this.handleVideoRequest.bind(this)
         // this.handleVideo = this.handleVideo.bind(this);
     }
@@ -218,7 +218,7 @@ class Video extends React.Component {
                                            <source src={'http://localhost:3000/' + video.url} type="video/mp4" />
                                            <track label="English" kind="subtitles" srcLang="en" src="http://source.vtt" default />
                                        </VideoPlayer>
-                                       <StarRating name={video._id} value={this.state.rating}
+                                       <StarRating name={video._id}
                                             onStarClick={this.onStarClick.bind(this)} /><br/>
                                        <label className="video-label text-tomato">{video.name}</label>
                                     </li>

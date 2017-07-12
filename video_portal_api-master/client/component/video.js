@@ -208,19 +208,25 @@ class Video extends React.Component {
                         {
                             this.state.videos.map(function(video, index) {
                                 return (
-                                    <li key={index}>
-                                        <VideoPlayer className="video-item"
-                                           controls={['PlayPause', 'Seek', 'Time', 'Volume', 'Fullscreen']}
-                                           onCanPlayThrough={() => {
-                                               // Do stuff
-                                            //    props.handleVideo();
-                                           }}>
-                                           <source src={'http://localhost:3000/' + video.url} type="video/mp4" />
-                                           <track label="English" kind="subtitles" srcLang="en" src="http://source.vtt" default />
-                                       </VideoPlayer>
-                                       <StarRating name={video._id}
-                                            onStarClick={this.onStarClick.bind(this)} /><br/>
-                                       <label className="video-label text-tomato">{video.name}</label>
+                                    <li className="video-card" key={index}>
+                                        <div className="video-container">
+                                            <VideoPlayer className="video-item" ref={video._id}
+                                               controls={['PlayPause', 'Seek', 'Time', 'Volume', 'Fullscreen']}
+                                               onCanPlayThrough={() => {
+                                                   // Do stuff
+                                                //    console.log(this);
+                                               }}>
+                                               <source src={'http://localhost:3000/' + video.url} type="video/mp4" />
+                                           </VideoPlayer>
+                                       </div>
+                                       <StarRating className="StarRating" name={video._id} onStarClick={this.onStarClick.bind(this)} />
+                                       <ul className="list-dropdown unstyled">
+
+                                            <li className="video-label text-tomato">{video.name}</li>
+                                            <ul className="dropdown-menu">
+                                                <label className="dropdown-item">{video.description}</label>
+                                            </ul>
+                                       </ul>
                                     </li>
                                 )
                             }.bind(this))

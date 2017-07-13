@@ -253,8 +253,8 @@ div.nav {
 }
 
 .list-dropdown > .dropdown-menu{
-    top: 0%;
-    left: 0%;
+    top: 0;
+    left: 40px;
 }
 
 .dropdown-menu {

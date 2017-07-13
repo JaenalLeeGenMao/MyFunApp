@@ -47,6 +47,18 @@ require('react-html5video/dist/styles.css');
 //     )
 // }
 
+function VideoLabel(props) {
+    return (
+        <ul className="list-dropdown unstyled">
+
+             <li className="video-label text-tomato">{props.name}</li>
+             <ul className="dropdown-menu">
+                 <label className="dropdown-item">{props.description}</label>
+             </ul>
+        </ul>
+    )
+}
+
 // Screen that displays lazy loader when logging out is invoked
 function LogoutScreen(props) {
     return (
@@ -96,9 +108,11 @@ class Video extends React.Component {
     componentDidMount() {
         // add event listener to dewtect scroll event
         window.addEventListener("scroll", this.handleScroll);
+        // Initilizing video
         if (this.state.videos.length === 0) {
             this.handleVideoRequest();
         }
+
         //Sending request to server to get single video
         // app.get('/video', helperFunctions.isAuthenticated, videos.getOne);
         // Axios.get('http://localhost:3000/video?sessionId=' + this.state.sessionId + '&videoId=5961f02a2ff3e43b9c67f452').then(function(res) {
@@ -154,6 +168,7 @@ class Video extends React.Component {
         }.bind(this));
     }
 
+    // detecting scroll events
     handleScroll() {
         var windowHeight = "innerHeight" in window ? window.innerHeight : document.documentElement.offsetHeight;
         var body = document.body;
@@ -215,18 +230,24 @@ class Video extends React.Component {
                                                onCanPlayThrough={() => {
                                                    // Do stuff
                                                 //    console.log(this);
+                                               }}
+                                               onPlay={() => {
+                                                //    console.log('played ' + video._id);
+                                                //    console.log(this);
+                                                   var videos = this.refs;
+                                                   console.log(video._id);
+                                                   console.log(videos);
+                                                   for (var id in videos) {
+                                                       if ( id !== video._id ) {
+                                                           videos[id].videoEl.pause();
+                                                       }
+                                                    }
                                                }}>
                                                <source src={'http://localhost:3000/' + video.url} type="video/mp4" />
                                            </VideoPlayer>
                                        </div>
                                        <StarRating className="StarRating" name={video._id} onStarClick={this.onStarClick.bind(this)} />
-                                       <ul className="list-dropdown unstyled">
-
-                                            <li className="video-label text-tomato">{video.name}</li>
-                                            <ul className="dropdown-menu">
-                                                <label className="dropdown-item">{video.description}</label>
-                                            </ul>
-                                       </ul>
+                                       <VideoLabel name={video.name} description={video.description} />
                                     </li>
                                 )
                             }.bind(this))

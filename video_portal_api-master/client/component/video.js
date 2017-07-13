@@ -85,7 +85,7 @@ class Video extends React.Component {
         this.handleLoader = this.handleLoader.bind(this);
         this.handleScroll = this.handleScroll.bind(this);
         // this.onStarClick = this.onStarClick.bind(this);
-        this.handleVideoRequest = this.handleVideoRequest.bind(this)
+        this.handleVideoRequest = this.handleVideoRequest.bind(this);
         // this.handleVideo = this.handleVideo.bind(this);
     }
     // set the values before any component UI is being uploaded
@@ -109,6 +109,7 @@ class Video extends React.Component {
         // add event listener to dewtect scroll event
         window.addEventListener("scroll", this.handleScroll);
         // Initilizing video
+        console.log(this.state.videos.length);
         if (this.state.videos.length === 0) {
             this.handleVideoRequest();
         }
@@ -159,6 +160,7 @@ class Video extends React.Component {
             var newData = res.data.data;
             // combine the previous data with new data
             videos =  videos.concat(newData)
+            console.log(videos);
             this.setState(function() {
                 return {
                     videos : videos,
@@ -177,12 +179,12 @@ class Video extends React.Component {
         var windowBottom = windowHeight + window.pageYOffset;
 
         if (windowBottom >= docHeight) {
-            setTimeout(this.handleVideoRequest, 3000);
+
             this.setState({
                 message: 'bottom reached',
                 loading: true
             });
-
+            setTimeout(this.handleVideoRequest, 5000);
         } else {
             this.setState({
                 message: 'not at bottom',
@@ -197,6 +199,17 @@ class Video extends React.Component {
         //     console.log(res);
         // });
         //
+        // Use this to enable all ratings after scrolldown
+        // this.setState(function() {
+        //     console.log(nextValue);
+        //     console.log(prevValue);
+        //     console.log(name);
+        //     return {
+        //         videoId: name,
+        //         rating: nextValue
+        //     }
+        // });
+        // Backend have duplicate id's, unable to fix because duplicate id detected
         Axios.post('http://localhost:3000/video/ratings?sessionId=' + this.state.sessionId, {videoId: name,rating: nextValue}).then(function(res) {
             console.log(res);
             this.setState(function() {
@@ -225,7 +238,7 @@ class Video extends React.Component {
                                 return (
                                     <li className="video-card" key={index}>
                                         <div className="video-container">
-                                            <VideoPlayer className="video-item" ref={video._id}
+                                            <VideoPlayer className="video-item" ref={video._id + index}
                                                controls={['PlayPause', 'Seek', 'Time', 'Volume', 'Fullscreen']}
                                                onCanPlayThrough={() => {
                                                    // Do stuff
@@ -235,10 +248,10 @@ class Video extends React.Component {
                                                 //    console.log('played ' + video._id);
                                                 //    console.log(this);
                                                    var videos = this.refs;
-                                                   console.log(video._id);
+                                                   console.log(video._id + index);
                                                    console.log(videos);
                                                    for (var id in videos) {
-                                                       if ( id !== video._id ) {
+                                                       if ( id !== video._id + index) {
                                                            videos[id].videoEl.pause();
                                                        }
                                                     }
@@ -254,7 +267,7 @@ class Video extends React.Component {
                         }
                     </ul>
                     : <LogoutScreen /> }
-                    {this.state.loading && <Loading/>}
+                    {this.state.loading && <div className="footer"><Loading/></div>}
             </div>
         )
     }

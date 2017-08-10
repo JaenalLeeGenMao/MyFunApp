@@ -63,16 +63,16 @@ helperFunctions.populateDb();
 routes(app);
 
 //Sending request to server to authorize the user
-app.post('/user/auth', users.auth);
+// app.post('/user/auth', users.auth);
 //Sending request to server to confirm user sessionId to be destroyed
-app.get('/user/logout', helperFunctions.isAuthenticated, users.logout);
+// app.get('/user/logout', helperFunctions.isAuthenticated, users.logout);
 
 //Sending request to server to get all videos
-app.get('/videos', helperFunctions.isAuthenticated, videos.get);
+// app.get('/videos', helperFunctions.isAuthenticated, videos.get);
 //Sending request to server to get single video
-app.get('/video', helperFunctions.isAuthenticated, videos.getOne);
+// app.get('/video', helperFunctions.isAuthenticated, videos.getOne);
 //Sending request to server to authorize the video rating
-app.post('/video/ratings', helperFunctions.isAuthenticated, videos.rate);
+// app.post('/video/ratings', helperFunctions.isAuthenticated, videos.rate);
 
 // serve video files.
 app.use('/videos',express.static('videos'));
